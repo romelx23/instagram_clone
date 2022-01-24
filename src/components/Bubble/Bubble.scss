@@ -1,0 +1,29 @@
+.bubble__container{
+    width: 83px;
+    height: 83px;
+    border-radius: 50%;
+    overflow: hidden;
+    font-family: 'Ranga', cursive;
+}
+
+.bubble_border{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(rgb(64,93,230),rgb(88,81,219),rgb(131,58,180),rgb(193,53,132),rgb(225,48,108),rgb(245,96,64),rgb(247,119,55),rgb(252,175,69),rgb(255,220,128));
+}
+
+.container__bubble{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bubble__image{
+    width: 100%;
+    height: 100%;
+}

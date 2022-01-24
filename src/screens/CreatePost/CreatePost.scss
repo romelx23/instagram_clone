@@ -1,0 +1,51 @@
+.container__create__post {
+  min-height: 100vh;
+  animation:entrada .5s ease ;
+}
+
+.content__create__post{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.preview{
+  width: 300px;
+  margin: 10px 0;
+  // height: 300px;
+}
+
+.card__form {
+  background: rgb(255, 174, 69);
+  color: #fff;
+  padding: 20px;
+  form {
+    // height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    label {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 20px;
+      outline: none;
+      border: none;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@keyframes entrada {
+  0%{
+    opacity: .2;
+  }
+  100%{
+    opacity: 1;
+  }
+}
