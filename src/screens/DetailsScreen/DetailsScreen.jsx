@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import "./DetailScreen.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFilterPost } from "../../hooks/usePost";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../context/authContext";

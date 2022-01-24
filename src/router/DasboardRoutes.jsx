@@ -11,7 +11,7 @@ import { AuthContext } from "../context/authContext";
 export const DasboardRoutes = () => {
   
   const {user,setUser} = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
 
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,7 @@ export const DasboardRoutes = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid,displayName, photoURL } = user;
-        console.log(uid, displayName, photoURL);
+        // console.log(uid, displayName, photoURL);
         setUser({
           displayName,
           photoURL,

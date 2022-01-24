@@ -8,7 +8,7 @@ import "./LoginScreen.scss";
 export const LoginScreen = () => {
   const navigate=useNavigate()
   const {user} = useContext(AuthContext);
-  const [formValues, handleInputChange, reset] = useForm({
+  const [formValues, handleInputChange ] = useForm({
     email: "", //romx23@gmail.com
     password: "", //123456
   });

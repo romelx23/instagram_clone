@@ -6,7 +6,7 @@ import { CardSqueleton } from "../CardSqueleton/CardSqueleton";
 import { convertDate } from "../../helpers/date";
 
 export const Publications = () => {
-  const [scroll, setScroll] = useState(0);
+  // const [scroll, setScroll] = useState(0);
   const { item } = usePost();
   // console.log(item);
 

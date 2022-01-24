@@ -10,7 +10,6 @@ import {
 import Swal from "sweetalert2";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { months } from "./date";
 
 export const authRegister = (email, password, name) => {
   const auth = getAuth();
@@ -73,7 +72,7 @@ export const handleLogOut=()=>{
 
 export const createPost=async(caption,username,image,user_url)=>{
   const fecha=new Date()
-  const key=fecha.getMilliseconds()
+  const key=fecha.getTime()
   await setDoc(doc(db, `post/${key}`), {
     caption,
     username,

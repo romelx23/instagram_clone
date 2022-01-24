@@ -1,7 +1,6 @@
-import moment from "moment";
 import React from "react";
 import { Link } from "react-router-dom";
-import { convertDate, formatDate } from "../../helpers/date";
+import { formatDate } from "../../helpers/date";
 import { BubbleAvatar } from "../BubbleAvatar/BubbleAvatar";
 import "./CardPublication.scss";
 import 'moment/locale/es'
