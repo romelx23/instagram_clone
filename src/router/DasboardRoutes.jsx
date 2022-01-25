@@ -8,9 +8,10 @@ import { NotFound } from "../screens/NotFound/NotFound";
 import { RegisterScreen } from "../screens/RegisterScreen/RegisterScreen";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "../context/authContext";
+import { ProfileScreen } from "../screens/ProfileScreen/ProfileScreen";
 export const DasboardRoutes = () => {
   
-  const {user,setUser} = useContext(AuthContext);
+  const {setUser} = useContext(AuthContext);
   // console.log(user);
 
   const [loading, setLoading] = useState(false);
@@ -49,6 +50,7 @@ export const DasboardRoutes = () => {
 
         <Route path="post/:postId" element={<DetailsScreen />} />
         <Route path="create-post" element={<CreatePost />} />
+        <Route path="edit-profile" element={<ProfileScreen />} />
         <Route path="auth">
           <Route path="login" element={<LoginScreen />} />
           <Route path="register" element={<RegisterScreen />} />

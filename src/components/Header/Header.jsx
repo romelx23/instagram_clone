@@ -27,23 +27,46 @@ export const Header = () => {
         </label>
         {/* </div> */}
         <div className="iconos">
-          <Link to={"/create-post"}>
+          <Link to={"/"}>
             <i className="fas fa-home"></i>
           </Link>
-          <i className="fas fa-paper-plane"></i>
-          <i className="far fa-compass"></i>
-          <i className="far fa-heart"></i>
+          <Link to={"/"}>
+            <i className="fas fa-paper-plane"></i>
+          </Link>
+          <Link to={"/create-post"} className="create__post">
+            <i className="fas fa-plus"></i>
+          </Link>
+          <Link to={"/"}>
+            <i className="far fa-compass"></i>
+          </Link>
+          <Link to={"/"}>
+            <i className="far fa-heart"></i>
+          </Link>
+        </div>
         {user.photoURL ? (
-          <div className="navbar__avatar" onClick={handleLogOut}>
-            <img src={user.photoURL} alt="avatar" />
-            <h6 className="avatar__name">{user.displayName}</h6>
+          <div className="navbar__avatar">
+            <label htmlFor="decoration">
+              <div className="avatar">
+                <img src={user.photoURL} alt="avatar" />
+                <h6 className="avatar__name">{user.displayName}</h6>
+              </div>
+            </label>
+            <input type="checkbox" name="decoration" id="decoration" />
+            <div className="btn btn__edit">
+              <Link to={"/edit-profile"}>
+              <i class="far fa-edit"></i>
+              </Link>
+            </div>
+
+            <div className="btn btn__logout" onClick={handleLogOut}>
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
           </div>
         ) : (
           <Link to={"auth/login"}>
             <i className="far fa-user"></i>
           </Link>
         )}
-        </div>
       </nav>
     </header>
   );

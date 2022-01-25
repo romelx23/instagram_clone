@@ -41,6 +41,21 @@
   }
 }
 
+.content__card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img{
+    width: 300px;
+    object-fit: contain;
+  }
+}
+
+.profile{
+  height: auto;
+}
+
 @keyframes entrada {
   0%{
     opacity: .2;

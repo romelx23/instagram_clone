@@ -27,7 +27,11 @@ export const convertDate = (fecha) => {
 export const formatDate=(item)=>{
   const date=convertDate(item.date)
   // console.log(date);
-  const dateParsed=moment(date).locale('es').format('LL')
+  const dateParsed=moment(date).locale('es').format('LL');
+  const hourParsed=moment(date).locale('es').startOf('minutes').fromNow();  
   // console.log(dateParsed);
-  return dateParsed;
+  return {
+    dateParsed,
+    hourParsed
+  };
 }

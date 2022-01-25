@@ -1,11 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
 import { BubbleAvatar } from "../BubbleAvatar/BubbleAvatar";
 import "./CardPublication.scss";
 import 'moment/locale/es'
 
 export const CardPublication = ({ item }) => {
+  const {dateParsed,hourParsed}=formatDate(item);
+  const navigate=useNavigate()
+
+
+  const handleComent=(e)=>{
+    e.preventDefault()
+    navigate(`post/${item.uid}`)
+  }
     
   return (
         <div className="card__publication">
@@ -31,7 +39,10 @@ export const CardPublication = ({ item }) => {
           <div className="card__comment">
             <div className="content__description">
             <h2>{item.caption}</h2>
-            <h2>{formatDate(item)}</h2>
+            <div className="content__date">
+            <h2>{dateParsed}</h2>
+            <h3>{hourParsed}</h3>
+            </div>
             </div>
             <div className="card__bar__icons">
               <div className="content__icons__card">
@@ -42,9 +53,11 @@ export const CardPublication = ({ item }) => {
               <i className="far fa-bookmark"></i>
             </div>
             <div className="comments__content">
+              <form action="" onSubmit={handleComent}>
               <i className="far fa-smile"></i>
               <input type="text" placeholder="ingrese su comentario" />
               <button>publicar</button>
+              </form>
             </div>
           </div>
         </div>

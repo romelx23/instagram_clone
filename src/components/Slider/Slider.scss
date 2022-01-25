@@ -1,5 +1,5 @@
 .slider{
-    background-color: #6ba0e6ce;
+    // background-color: #6ba0e6ce;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -7,7 +7,7 @@
     width: 600px;
     overflow-x: scroll;
     // overflow: hidden;
-    border: .01rem solid rgba(117, 117, 117, 0.787);
+    // border: .01rem solid rgba(117, 117, 117, 0.787);
 }
 .slider h3{
     padding: 0;
@@ -22,7 +22,7 @@
 
 .slider::-webkit-scrollbar {
     width: 10px;
-    height: 10px;
+    height: 5px;
 }
 
 .slider::-webkit-scrollbar-thumb {

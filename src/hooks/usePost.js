@@ -7,7 +7,7 @@ export const usePost = () => {
   
   const postcollection = query(collection(db, "post"));
   useEffect(() => {
-      onSnapshot(postcollection, (docs) => {
+      const unSubcribe=onSnapshot(postcollection, (docs) => {
         const post = [];
         docs.forEach((doc) => {
         //   console.log(doc.data());
@@ -19,6 +19,9 @@ export const usePost = () => {
       });
       setItem(post)
       });
+      // return ()=>{
+      //   unSubcribe()
+      // }
   }, []);
   // console.log(item);
   return {

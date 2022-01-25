@@ -12,25 +12,19 @@ export const Publications = () => {
 
   // Ordenar por fecha o por id
   const orderDate = () => {
-    console.log("order");
+    // console.log("order");
     const order = item.sort((a, b) => {
       return convertDate(b.date) - convertDate(a.date);
     });
     // setItem(order)
   };
   orderDate();
-  useEffect(() => {
-    // window.onscroll = () => {
-    //   const y = window.scrollY;
-    //   console.log(y);
-    // };
-  }, []);
 
   // console.log(item.sort((a,b)=>{return a.date-b.date}));
 
   return (
     <div className="container__publications">
-      <h1>Publications</h1>
+      <h1>Publicaciones</h1>
       {item.length !== 0 ? (
         item.map((item) => <CardPublication key={item.uid} item={item} />)
       ) : (
