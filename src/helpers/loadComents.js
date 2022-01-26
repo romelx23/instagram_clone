@@ -1,10 +1,10 @@
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 
 export const useGetComents = (uid) => {
   const [coment, setComent] = useState([]);
-  const comentCollection = query(collection(db, `post/${uid}/coment`));
+  const comentCollection = query(collection(db, `post/${uid}/coment`),orderBy("date", "desc"));
   useEffect(() => {
     const unsSubcribe=onSnapshot(comentCollection, (docs) => {
       const coments = [];

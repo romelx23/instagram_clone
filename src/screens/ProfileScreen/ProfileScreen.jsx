@@ -11,12 +11,15 @@ import "../CreatePost/CreatePost.scss";
 export const ProfileScreen = () => {
   // Validar si está logueado
   const navigate = useNavigate();
-  const { user,setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [url, setUrl] = useState("");
   // Crear Post
-  const [values, handleInputChange] = useForm();
+  const [values, handleInputChange] = useForm({
+    name: "",
+    file: "",
+  });
   // console.log(values);
-  const { name, file } = values;
+  const { name } = values;
 
   const handleFileChange = async (e) => {
     console.log(e.target.files);
@@ -41,7 +44,7 @@ export const ProfileScreen = () => {
       });
       return false;
     }
-    if (file.length === 0) {
+    if (!url) {
       // dispatch(setError('name is required'))
       console.log("El Archivo es requerido");
       Swal.fire({
@@ -58,16 +61,18 @@ export const ProfileScreen = () => {
     e.preventDefault();
     // console.log(e.target);
 
-    if (isFormValid) {
+    if (isFormValid()) {
       await updateProfileCurrent(name, url)
-      .then((e)=>{
-        console.log(e);
-      })
-      .catch(
-        (e) => {
+        .then((e) => {
           console.log(e);
-        }
-      );
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      setUser({
+        displayName:name,
+        photoURL:url,
+      });
     }
     navigate("/");
   };
@@ -85,8 +90,8 @@ export const ProfileScreen = () => {
         <div className="card__form">
           <h2>Ingrese su Usuario</h2>
           <div className="content__card">
-              <img src={user.photoURL} alt="avatar__actual" />
-              <h3>{user.displayName}</h3>
+            <img src={user.photoURL} alt="avatar__actual" />
+            <h3>{user.displayName}</h3>
           </div>
           <form action="" onSubmit={handleForm}>
             <label htmlFor="title">
@@ -105,10 +110,15 @@ export const ProfileScreen = () => {
               name="file"
               onChange={handleFileChange}
             />
-            {url ? <img className="preview" src={url} alt="preview" />
-             :
-             <img className="preview" src="https://mtxweb.ch/wp-content/uploads/2017/02/UploadLimit-Header.png" alt="upload" />
-            }
+            {url ? (
+              <img className="preview" src={url} alt="preview" />
+            ) : (
+              <img
+                className="preview"
+                src="https://mtxweb.ch/wp-content/uploads/2017/02/UploadLimit-Header.png"
+                alt="upload"
+              />
+            )}
             <button type="submit">Enviar</button>
           </form>
         </div>

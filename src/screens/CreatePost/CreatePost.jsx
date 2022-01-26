@@ -13,10 +13,15 @@ export const CreatePost = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [url, setUrl] = useState("");
+  const [load, setLoad] = useState(false);
   // Crear Post
-  const [values, handleInputChange] = useForm();
+  const [values, handleInputChange] = useForm({
+    title:'',
+    file:''
+  });
   // console.log(values);
-  const { title, file } = values;
+  const { title } = values;
+  // console.log(values);
 
   const handleFileChange = async (e) => {
     console.log(e.target.files);
@@ -41,7 +46,7 @@ export const CreatePost = () => {
       });
       return false;
     }
-    if (file.length === 0) {
+    if (!url) {
       // dispatch(setError('name is required'))
       console.log("El Archivo es requerido");
       Swal.fire({
@@ -50,22 +55,22 @@ export const CreatePost = () => {
       });
       return false;
     }
-
+    setLoad(false);
     return true;
   };
-
   const handleForm = async (e) => {
     e.preventDefault();
     // console.log(e.target);
 
-    if (isFormValid) {
+    if (isFormValid()) {
       await createPost(title, user.displayName, url, user.photoURL).catch(
         (e) => {
           console.log(e);
         }
       );
     }
-    navigate("/");
+    // setLoad(true);
+    // navigate("/");
   };
   useEffect(() => {
     if (!user.displayName) {
@@ -97,11 +102,18 @@ export const CreatePost = () => {
               name="file"
               onChange={handleFileChange}
             />
-            {url ? <img className="preview" src={url} alt="preview" />
-             :
-             <img className="preview" src="https://mtxweb.ch/wp-content/uploads/2017/02/UploadLimit-Header.png" alt="upload" />
-            }
-            <button type="submit">Enviar</button>
+            {url ? (
+              <img className="preview" src={url} alt="preview" />
+            ) : (
+              <img
+                className="preview"
+                src="https://mtxweb.ch/wp-content/uploads/2017/02/UploadLimit-Header.png"
+                alt="upload"
+              />
+            )}
+            <button disabled={load} type="submit">
+              Enviar
+            </button>
           </form>
         </div>
       </div>

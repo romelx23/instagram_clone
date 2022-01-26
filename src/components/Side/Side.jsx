@@ -6,8 +6,8 @@ import { Usuario } from '../Usuario/Usuario'
 export const Side = () => {
     return (
         <>
-            <Usuario/>
-            <Sugerencias/>
+            {/* <Usuario/> */}
+            {/* <Sugerencias/> */}
             <Footer/>
         </>
     )

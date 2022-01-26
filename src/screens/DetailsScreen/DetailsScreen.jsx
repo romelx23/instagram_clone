@@ -42,13 +42,13 @@ export const DetailsScreen = () => {
   const { coment: coments, setComent } = useGetComents(postId);
 
   // ordenar los comentarios
-  const orderDate = () => {
-    const order = coments.sort((a, b) => {
-      return convertDate(b.date) - convertDate(a.date);
-    });
-    // setItem(order)
-  };
-  orderDate();
+  // const orderDate = () => {
+  //   const order = coments.sort((a, b) => {
+  //     return convertDate(b.date) - convertDate(a.date);
+  //   });
+  //   // setItem(order)
+  // };
+  // orderDate();
 
   useEffect(() => {
     if (!user.displayName) {

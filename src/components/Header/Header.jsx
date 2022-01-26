@@ -54,12 +54,12 @@ export const Header = () => {
             <input type="checkbox" name="decoration" id="decoration" />
             <div className="btn btn__edit">
               <Link to={"/edit-profile"}>
-              <i class="far fa-edit"></i>
+              <i className="far fa-edit"></i>
               </Link>
             </div>
 
             <div className="btn btn__logout" onClick={handleLogOut}>
-              <i class="fas fa-sign-out-alt"></i>
+              <i className="fas fa-sign-out-alt"></i>
             </div>
           </div>
         ) : (
