@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { CardPublication } from "../CardPublication/CardPublication";
-import { nextP, useNextPost, usePost } from "../../hooks/usePost";
+import { nextP } from "../../hooks/usePost";
 import "../Publications/Publications.scss";
 import { CardSqueleton } from "../CardSqueleton/CardSqueleton";
 // import { convertDate } from "../../helpers/date";
@@ -17,14 +17,15 @@ export const Publications = () => {
     },
     container
   );
-  const [uid, setUid] = useState("");
   const [pan, setPan] = useState([]);
   const [load, setLoad] = useState(false);
   // console.log(isVisible);
 
   // const { item, setItem } = usePost();
-  const {post:item,setPost:setItem} = useContext(PostContext);
-  
+  const { post: item, setPost: setItem } = useContext(PostContext);
+  // const items=useMemo(() => item, [item]);
+  // console.log(item);
+
   // console.log(item[item.length-1]);
   // const {nextitem}=useNextPost(uid)
   // console.log(nextitem);
@@ -38,7 +39,7 @@ export const Publications = () => {
   //   });
   //   // setItem(order)
   // };
-  
+
   const lastElement = item.slice(-1)[0];
   const trae = async () => {
     if (item.length !== 0) {
@@ -46,21 +47,17 @@ export const Publications = () => {
       // console.log(resp);
       setPan(resp);
     }
-    if(pan.length!==0){
-      setLoad(true)
+    if (pan.length !== 0) {
+      setLoad(true);
     }
   };
   // console.log(pan);
 
   useEffect(() => {
-    // if (item.length !== 0) {
-    //   console.log(lastElement.uid);
-    //   setUid(lastElement.uid);
-    // }
     trae();
     if (isVisible === true) {
       setItem([...item, ...pan]);
-      setLoad(false)
+      setLoad(false);
     }
   }, [isVisible]);
 
@@ -80,10 +77,14 @@ export const Publications = () => {
           </>
         )}
       </div>
-      {
-        load?<img src="https://tradinglatam.com/wp-content/uploads/2019/04/loading-gif-png-4.gif" alt="spinner" />
-        :<></>
-      }
+      {load ? (
+        <img
+          src="https://tradinglatam.com/wp-content/uploads/2019/04/loading-gif-png-4.gif"
+          alt="spinner"
+        />
+      ) : (
+        <></>
+      )}
       <div className="reference" ref={container}></div>
     </>
   );

@@ -1,3 +1,4 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
@@ -7,7 +8,7 @@ import "./LoginScreen.scss";
 
 export const LoginScreen = () => {
   const navigate=useNavigate()
-  const {user} = useContext(AuthContext);
+  const {user,setUser} = useContext(AuthContext);
   const [formValues, handleInputChange ] = useForm({
     email: "", //romx23@gmail.com
     password: "", //123456
@@ -23,6 +24,28 @@ export const LoginScreen = () => {
     // dispatch(StartGooogleLogin());
     googleSignIn()
   };
+
+   useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid,displayName, photoURL } = user;
+        // console.log(uid, displayName, photoURL);
+        setUser({
+          displayName,
+          photoURL,
+          uid
+        });
+      } else {
+        // User is signed out
+        setUser({});
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   useEffect(() => {
     if(user.displayName){
       navigate('/')

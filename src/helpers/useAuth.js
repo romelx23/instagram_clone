@@ -10,32 +10,41 @@ import {
 import Swal from "sweetalert2";
 import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
 
-export const authRegister = (email, password, name) => {
-  const auth = getAuth();
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      if (user.displayName) {
-      } else {
-        updateProfile(user, {
-          displayName: name,
-          photoURL:
-            "https://res.cloudinary.com/react-romel/image/upload/v1617636275/n2c8uanoks7hjod45fjd.jpg",
+export const useAuthRegister = () => {
+  const { setUser,user } = useContext(AuthContext);
+  const authRegister = (email, password, name) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        if (user.displayName) {
+        } else {
+          const photoURL="https://res.cloudinary.com/react-romel/image/upload/v1617636275/n2c8uanoks7hjod45fjd.jpg"
+          updateProfile(user, {
+            displayName: name,
+            photoURL,
+          });
+          setUser({
+            displayName:name,
+            photoURL,
+            uid:user.uid
+          })
+        }
+        Swal.fire({
+          icon: "success",
+          title: "Correcto",
+          text: "Se Registro correctamente...",
         });
-      }
-      console.log(user);
-      Swal.fire({
-        icon: "success",
-        title: "Correcto",
-        text: "Se Registro correctamente...",
-      });
-    })
-    .catch((error) => Swal.fire("Error", error.message, "error"));
+      })
+      .catch((error) => Swal.fire("Error", error.message, "error"));
+  };
+  // console.log(user);
   return {
-    email,
-    name,
+    authRegister,
   };
 };
 
@@ -134,24 +143,24 @@ export const createComent = async (coment, uid, username, user_url) => {
     date: fecha,
   });
 
-  Swal.fire({
-    title: "Realizo un Comentario",
-    icon: "success",
-  });
+  // Swal.fire({
+  //   title: "Realizo un Comentario",
+  //   icon: "success",
+  // });
 };
 
-export const updateProfileCurrent = async(displayName,photoURL) => {
+export const updateProfileCurrent = async (displayName, photoURL) => {
   const auth = getAuth();
   updateProfile(auth.currentUser, {
     displayName,
-    photoURL
+    photoURL,
   })
     .then(() => {
       // Profile updated!
       Swal.fire({
-        title:'Perfil Actualizado',
-        icon:'success'
-      })
+        title: "Perfil Actualizado",
+        icon: "success",
+      });
       // ...
     })
     .catch((error) => {

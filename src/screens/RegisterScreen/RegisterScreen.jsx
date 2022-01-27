@@ -2,13 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/authContext";
-import { authRegister } from "../../helpers/useAuth";
+import { useAuthRegister } from "../../helpers/useAuth";
 import { useForm } from "../../hooks/useForm";
 import "./../LoginScreen/LoginScreen.scss";
 
 export const RegisterScreen = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
+  const {authRegister}=useAuthRegister();
 
   const registro = {
     name: "", //Romel
@@ -58,15 +59,16 @@ export const RegisterScreen = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(name, email, password, password2);
+    // console.log(name, email, password, password2);
     if (isFormValid()) {
       console.log("formulario correcto");
       authRegister(email, password, name);
       // dispatch(startRegisterWithEmailPasswordName(email,password,name));
     }
+    // authLogin(email,password)
   };
-
   useEffect(() => {
+    // console.log(user);
     if (user.displayName) {
       navigate("/");
     }

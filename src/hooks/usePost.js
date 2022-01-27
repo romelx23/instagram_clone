@@ -5,7 +5,6 @@ import {
   orderBy,
   limit,
   startAfter,
-  getDocs,
   getDoc,
   doc,
 } from "firebase/firestore";
@@ -23,7 +22,7 @@ export const usePost = () => {
     limit(10)
   );
   useEffect(() => {
-    const unSubcribe = onSnapshot(postcollection, (docs) => {
+    onSnapshot(postcollection, (docs) => {
       const post = [];
       docs.forEach((doc) => {
         //   console.log(doc.data());
@@ -33,7 +32,15 @@ export const usePost = () => {
         });
         //   setItem({...doc.data})
       });
-      setItem(post);
+        if(item.length!==item[item.length-1]){
+          setItem(item);
+        }if(item.length===1){
+          setItem(post);
+        }
+      // else if(post.length===0){
+      //   setItem(post)
+      // }
+
     });
     // return ()=>{
     //   unSubcribe()

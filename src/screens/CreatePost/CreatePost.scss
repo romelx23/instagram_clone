@@ -20,6 +20,9 @@
   background: rgb(255, 174, 69);
   color: #fff;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
   form {
     // height: 400px;
     display: flex;
@@ -52,9 +55,16 @@
   }
 }
 
-.profile{
-  height: auto;
+@media screen and (max-width:700px) {
+  .content__create__post{
+    margin-bottom: 40px;
+  }
+  
 }
+
+// .profile{
+//   height: auto;
+// }
 
 @keyframes entrada {
   0%{

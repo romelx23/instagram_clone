@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFilterPost } from "../../hooks/usePost";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../context/authContext";
-import { convertDate, formatDate } from "../../helpers/date";
+import {  formatDate } from "../../helpers/date";
 import { BubbleAvatar } from "../../components/BubbleAvatar/BubbleAvatar";
 import { useForm } from "../../hooks/useForm";
 import { createComent } from "../../helpers/useAuth";
@@ -13,8 +13,11 @@ import { CardSqueleton } from "../../components/CardSqueleton/CardSqueleton";
 import Swal from "sweetalert2";
 
 export const DetailsScreen = () => {
-  const [values, handleChange,reset] = useForm();
+  const [values, handleChange,setValues] = useForm({
+    coment:''
+  });
   const { coment } = values;
+  // console.log(values);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
@@ -26,20 +29,20 @@ export const DetailsScreen = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    if(!coment){
+    if(coment.length===0){
       Swal.fire({
         title:"Debe de llenar el campo",
         icon:'error'
       })
       return false;
     }
-    reset()
     // console.log(e);
     console.log(coment, postId, user.displayName, user.photoURL);
+    setValues({coment:''})
     await createComent(coment, postId, user.displayName, user.photoURL);
   };
   // pasamos el id del post
-  const { coment: coments, setComent } = useGetComents(postId);
+  const { coment: coments} = useGetComents(postId);
 
   // ordenar los comentarios
   // const orderDate = () => {
@@ -49,7 +52,6 @@ export const DetailsScreen = () => {
   //   // setItem(order)
   // };
   // orderDate();
-
   useEffect(() => {
     if (!user.displayName) {
       navigate("/auth/login");
@@ -92,6 +94,7 @@ export const DetailsScreen = () => {
                     type="text"
                     name="coment"
                     onChange={handleChange}
+                    value={coment}
                     placeholder="ingrese su comentario"
                   />
                   <button>publicar</button>
