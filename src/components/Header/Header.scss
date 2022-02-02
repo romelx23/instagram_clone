@@ -111,7 +111,7 @@ nav {
     height: 50px;
     border-radius: 50%;
     font-size: 30px;
-    bottom: -110px;
+    top: 150px;
     visibility: hidden;
     opacity: 0;
   }
@@ -119,6 +119,9 @@ nav {
     
   }
   .btn__edit{
+    top: 98px;
+  }
+  .btn__profile{
     top: 45px;
   }
   input[type=checkbox]{

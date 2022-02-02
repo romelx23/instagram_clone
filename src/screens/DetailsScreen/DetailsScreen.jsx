@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import "./DetailScreen.scss";
-import { useNavigate, useParams } from "react-router-dom";
-import { useFilterPost } from "../../hooks/usePost";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFilterPost, usePostFilterbyId } from "../../hooks/usePost";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../context/authContext";
 import {  formatDate } from "../../helpers/date";
@@ -24,7 +24,8 @@ export const DetailsScreen = () => {
   const { postId } = useParams();
   // console.log(postId);
 
-  const { filtrado } = useFilterPost(postId);
+  // const { filtrado } = useFilterPost(postId);
+  const { item:filtrado } = usePostFilterbyId(postId);
   // console.log(filtrado);
 
   const handleForm = async (e) => {
@@ -66,6 +67,9 @@ export const DetailsScreen = () => {
         <div className="header__deatils"></div>
         {filtrado.length !== 0 ? (
           <div className="container__content__details">
+            <div className="">
+              <button className="btn__back" onClick={()=>navigate(-1)}><i className="fas fa-arrow-left"></i></button>
+            </div>
             <BubbleAvatar
               nombre={filtrado[0].username}
               avatar={filtrado[0].user_url}

@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 
 export const useAuthRegister = () => {
-  const { setUser,user } = useContext(AuthContext);
+  const { setUser, user } = useContext(AuthContext);
   const authRegister = (email, password, name) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
@@ -23,16 +23,17 @@ export const useAuthRegister = () => {
         const user = userCredential.user;
         if (user.displayName) {
         } else {
-          const photoURL="https://res.cloudinary.com/react-romel/image/upload/v1617636275/n2c8uanoks7hjod45fjd.jpg"
+          const photoURL =
+            "https://res.cloudinary.com/react-romel/image/upload/v1617636275/n2c8uanoks7hjod45fjd.jpg";
           updateProfile(user, {
             displayName: name,
             photoURL,
           });
           setUser({
-            displayName:name,
+            displayName: name,
             photoURL,
-            uid:user.uid
-          })
+            uid: user.uid,
+          });
         }
         Swal.fire({
           icon: "success",
@@ -82,6 +83,7 @@ export const handleLogOut = () => {
 export const createPost = async (caption, username, image, user_url) => {
   const fecha = new Date();
   const key = fecha.getTime();
+  // const newItem = [];
   await setDoc(doc(db, `post/${key}`), {
     caption,
     username,
@@ -89,10 +91,12 @@ export const createPost = async (caption, username, image, user_url) => {
     date: fecha,
     user_url,
   });
+  // newItem.push([{ uid:key,caption, username, image, date: fecha, user_url }]);
   Swal.fire({
     title: "Posteado con exito",
     icon: "success",
   });
+  // return newItem;
 };
 
 export const googleSignIn = () => {
@@ -167,4 +171,19 @@ export const updateProfileCurrent = async (displayName, photoURL) => {
       // An error occurred
       // ...
     });
+};
+
+export const getUserCurrent = (username = "") => {
+  const auth = getAuth();
+  const user = auth.name;
+
+  if (user !== null) {
+    user.providerData.forEach((profile) => {
+      console.log("Sign-in provider: " + profile.providerId);
+      console.log("  Provider-specific UID: " + profile.uid);
+      console.log("  Name: " + profile.displayName);
+      console.log("  Email: " + profile.email);
+      console.log("  Photo URL: " + profile.photoURL);
+    });
+  }
 };

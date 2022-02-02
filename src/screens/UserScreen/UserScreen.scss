@@ -1,0 +1,65 @@
+.content__user{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    color: #fff;
+    animation: entry .7s ease;
+    height: auto;
+    padding-bottom:50px ;
+    .avatar{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(51, 51, 51, 0.705);
+    }
+    .content__info{
+        margin-left: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .profile{
+            display: flex;
+            justify-content: space-between;
+        }
+        .actions{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+}
+.content__publications{
+    margin: 0 20px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .content__btns{
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .content__cards{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+        gap: 10px;
+        place-items: center;
+        .card__post{
+            width: 200px;
+            height: 200px;
+            img{
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+@keyframes entry {
+    0%{
+        opacity: .5;
+    }100%{
+        opacity: 1;
+    }
+}

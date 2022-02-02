@@ -4,11 +4,12 @@ import { formatDate } from "../../helpers/date";
 import { BubbleAvatar } from "../BubbleAvatar/BubbleAvatar";
 import "./CardPublication.scss";
 import 'moment/locale/es'
+import { useGetComent } from "../../helpers/loadComents";
 
 export const CardPublication = ({ item }) => {
   const {dateParsed,hourParsed}=formatDate(item);
   const navigate=useNavigate()
-
+  const { coment } = useGetComent(item.uid);
 
   const handleComent=(e)=>{
     e.preventDefault()
@@ -59,6 +60,21 @@ export const CardPublication = ({ item }) => {
               <button>publicar</button>
               </form>
             </div>
+            <div className="coment publication">
+                  {coment.map((el) => {
+                    const key = Math.random().toString(36).slice(2);
+                    return (
+                      <div className="content__coment" key={key}>
+                        <img src={el.user_url} alt="avatar" />
+                        <div className="">
+                          <h5>{el.username}</h5>
+                          <h4>{el.coment}</h4>
+                          <h5>{formatDate(el).hourParsed}</h5>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
           </div>
         </div>
   );

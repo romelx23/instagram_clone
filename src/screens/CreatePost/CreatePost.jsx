@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../context/authContext";
+// import { PostContext } from "../../context/postContext";
 import { fileUpload } from "../../helpers/fileUpload";
 import { createPost } from "../../helpers/useAuth";
 import { useForm } from "../../hooks/useForm";
@@ -12,6 +13,7 @@ export const CreatePost = () => {
   // Validar si está logueado
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  // const { post,setPost } = useContext(PostContext);
   const [url, setUrl] = useState("");
   const [load, setLoad] = useState(false);
   // Crear Post
@@ -63,7 +65,9 @@ export const CreatePost = () => {
     // console.log(e.target);
 
     if (isFormValid()) {
-      await createPost(title, user.displayName, url, user.photoURL).catch(
+      // createPost(title, user.displayName, url, user.photoURL)
+      await createPost(title, user.displayName, url, user.photoURL)
+      .catch(
         (e) => {
           console.log(e);
         }

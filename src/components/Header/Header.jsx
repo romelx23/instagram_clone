@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { handleLogOut } from "../../helpers/useAuth";
 import "../Header/Header.scss";
+import { Search } from "../Search/Search";
 export const Header = () => {
   const { user } = useContext(AuthContext);
   return (
@@ -16,16 +17,15 @@ export const Header = () => {
             alt="logo"
           />
         </Link>
-        <label className="label__search" htmlFor="search">
-          {/* <i className="fas fa-search logo__search"></i> */}
+        {/* <label className="label__search" htmlFor="search">
           <input
             className="input__search"
             type="text"
             placeholder="Buscar"
             id="search"
           />
-        </label>
-        {/* </div> */}
+        </label> */}
+        <Search/>
         <div className="iconos">
           <Link to={"/"}>
             <i className="fas fa-home"></i>
@@ -52,6 +52,11 @@ export const Header = () => {
               </div>
             </label>
             <input type="checkbox" name="decoration" id="decoration" />
+            <div className="btn btn__profile">
+              <Link to={"/profile"}>
+              <i className="fas fa-user"></i>
+              </Link>
+            </div>
             <div className="btn btn__edit">
               <Link to={"/edit-profile"}>
               <i className="far fa-edit"></i>
